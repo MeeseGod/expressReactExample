@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 
-class Users extends Component {
+class Test extends Component {
 
     constructor(props){
         super(props);
@@ -11,7 +11,7 @@ class Users extends Component {
     }
 
     componentDidMount(){
-        fetch('/api/users')
+        fetch('/api/test')
         .then(res => res.json())
         .then(users => {
             this.setState({users: users});
@@ -22,9 +22,9 @@ class Users extends Component {
         return (
             <div>
                 <h1>
-                    User Component
+                    Test Component
                 </h1>
-                <Link to={"/test"}>Test</Link>
+                <Link to={"/"}>Users</Link>
                 <ul>
                     {
                         this.state.users.map(user => (
@@ -37,4 +37,4 @@ class Users extends Component {
     }
 }
 
-export default Users;
+export default Test;

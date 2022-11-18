@@ -1,11 +1,23 @@
-const express = require("express");
-const app = express();
+const express = require('express');
+const path = require('path');
 const users = require("./routes/users");
+const test = require("./routes/test");
+const app = express();
 
-app.use("/api/users", users);
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get("/api", (req, res) => {
-    res.send("hello world");
+// An api endpoint that returns a short list of items
+app.use('/api/users', users);
+
+app.use('/api/test', test);
+
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
-app.listen(1234);
+const port = process.env.PORT || 1234;
+app.listen(port);
+
+console.log('App is listening on port ' + port);
